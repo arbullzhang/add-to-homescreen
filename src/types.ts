@@ -75,6 +75,7 @@ export interface AddToHomeScreenType {
   isBrowserIOSSafari26: () => boolean;
   isIOSVersion26OrHigher: () => boolean;
   isBrowserIOSChrome: () => boolean;
+  isBrowserIOSEdge: () => boolean;
   isBrowserIOSFirefox: () => boolean;
   isBrowserIOSInAppFacebook: () => boolean;
   isBrowserIOSInAppLinkedin: () => boolean;

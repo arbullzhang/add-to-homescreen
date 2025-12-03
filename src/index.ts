@@ -174,6 +174,22 @@ export function AddToHomeScreen(
           );
 
           _genIOSChrome(container);
+        } else if (isBrowserIOSEdge()) {
+          ret = new DeviceInfo(
+            (_isStandAlone = false),
+            (_canBeStandAlone = true),
+            (_device = _device)
+          );
+
+          _genIOSEdge(container);
+        } else if (isBrowserIOSFirefox()) {
+          ret = new DeviceInfo(
+            (_isStandAlone = false),
+            (_canBeStandAlone = true),
+            (_device = _device)
+          );
+
+          _genIOSFirefox(container);
         } else if (
           isBrowserIOSInAppFacebook() 
           || isBrowserIOSInAppLinkedin()
@@ -344,6 +360,7 @@ export function AddToHomeScreen(
       isDeviceIOS() &&
       _matchesUserAgent(/Safari/) &&
       !isBrowserIOSChrome() &&
+      !isBrowserIOSEdge() &&
       !isBrowserIOSFirefox() &&
       !isBrowserIOSInAppFacebook() &&
       !isBrowserIOSInAppLinkedin() &&
@@ -397,6 +414,10 @@ export function AddToHomeScreen(
      Mobile/14E5239e Safari/602.1 */
   function isBrowserIOSChrome(): boolean {
     return isDeviceIOS() && _matchesUserAgent(/CriOS/);
+  }
+
+  function isBrowserIOSEdge(): boolean {
+    return isDeviceIOS() && _matchesUserAgent(/Edg/);
   }
 
   /* Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) 
@@ -808,6 +829,128 @@ export function AddToHomeScreen(
       _genBlurbMobile() +
       _genModalEnd() +
       (showArrow ? divBouncingArrow("ios-ipad-safari-bouncing-arrow-container") +
+      `<img src="` +
+      _genAssetUrl("ios-safari-bouncing-arrow.svg") +
+      `" alt="arrow" />
+    </div>` : '');
+    container.innerHTML = containerInnerHTML;
+    container.classList.add("adhs-mobile", "adhs-ios", "adhs-safari", "adhs-ios26");
+  }
+
+  function _genIOSEdge(container: HTMLElement) {
+    var containerInnerHTML =
+      _genModalStart() +
+      _genInstallAppHeader() +
+      _genAppNameHeader() +
+      // _genAppUrlHeader() +
+      _genListStart() +
+      _genListItem(
+        `1`,
+        i18n.__(
+          "Tap %s in the toolbar.",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-edge-more-white-button.svg")
+          )
+        )
+      ) +
+      _genListItem(
+        `2`,
+        i18n.__(
+          "Tap %s in the menu.",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-safari-ios26-share-button.svg"),
+            i18n.__("Share"),
+            "left"
+          )
+        )
+      ) +
+      _genListItem(
+        `3`,
+        i18n.__(
+          "Tap %s",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-safari-ios26-more-grey-button.svg"),
+            i18n.__("More"),
+            "left"
+          )
+        )
+      ) +
+      _genListItem(
+        `4`,
+        i18n.__(
+          "Select %s from the menu.",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-safari-add-to-home-screen-button-2.svg"),
+            i18n.__("Add to Home Screen"),
+            "left"
+          )
+        )
+      ) +
+      _genListEnd() +
+      _genBlurbMobile() +
+      _genModalEnd() +
+      (showArrow ? divBouncingArrow("ios-safari-bouncing-arrow-container") +
+      `<img src="` +
+      _genAssetUrl("ios-safari-bouncing-arrow.svg") +
+      `" alt="arrow" />
+    </div>` : '');
+    container.innerHTML = containerInnerHTML;
+    container.classList.add("adhs-mobile", "adhs-ios", "adhs-safari", "adhs-ios26");
+  }
+
+    function _genIOSFirefox(container: HTMLElement) {
+    var containerInnerHTML =
+      _genModalStart() +
+      _genInstallAppHeader() +
+      _genAppNameHeader() +
+      // _genAppUrlHeader() +
+      _genListStart() +
+      _genListItem(
+        `1`,
+        i18n.__(
+          "Tap %s in the toolbar.",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-edge-more-white-button.svg")
+          )
+        )
+      ) +
+      _genListItem(
+        `2`,
+        i18n.__(
+          "Tap %s in the menu.",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-safari-ios26-share-button.svg"),
+            i18n.__("Share"),
+            "left"
+          )
+        )
+      ) +
+      _genListItem(
+        `3`,
+        i18n.__(
+          "Tap %s",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-safari-ios26-more-grey-button.svg"),
+            i18n.__("More"),
+            "left"
+          )
+        )
+      ) +
+      _genListItem(
+        `4`,
+        i18n.__(
+          "Select %s from the menu.",
+          _genListButtonWithImage(
+            _genAssetUrl("ios-safari-add-to-home-screen-button-2.svg"),
+            i18n.__("Add to Home Screen"),
+            "left"
+          )
+        )
+      ) +
+      _genListEnd() +
+      _genBlurbMobile() +
+      _genModalEnd() +
+      (showArrow ? divBouncingArrow("ios-safari-bouncing-arrow-container") +
       `<img src="` +
       _genAssetUrl("ios-safari-bouncing-arrow.svg") +
       `" alt="arrow" />
@@ -1338,6 +1481,7 @@ export function AddToHomeScreen(
     isBrowserAndroidFirefox,
     isBrowserAndroidSamsung,
     isBrowserIOSChrome,
+    isBrowserIOSEdge,
     isBrowserIOSFirefox,
     isBrowserIOSInAppFacebook,
     isBrowserIOSInAppInstagram,
